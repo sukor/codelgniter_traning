@@ -149,67 +149,89 @@
      author:
      date:
      ********************************************/
-  public function _get_order_customer(){
+  public function _get_order_customer($cus='tiada',$pro='tiada',$page=0){
 
-   
-   if($_SERVER['REQUEST_METHOD']=="POST"){
+
+    $this->load->library('pagination');
+
+
+    $dataserch=array();
+   if($_POST){
     $customerName= $this->input->post('customerName',TRUE);
     $productName= $this->input->post('productName',TRUE);
+     
+     $dataserch=array(
+      'customerName'=>$customerName,
+       'productName'=>$productName
+      );
+    
+   }else{
+
+
+    $customerName= $cus;
+    $productName= $pro;
+
+
+
+      $dataserch=array(
+      'customerName'=>$customerName,
+       'productName'=>$productName
+      );
+
+
    }
+    $customerNamelink=empty($customerName)?'tiada':$customerName;
+    $productNamelink=empty($productName)?'tiada':$productName;
+
+    $srchlink=$customerNamelink.'/'.$productNamelink;
     
 
 
-    $product= $this->m_c->get_product();
 
-         $optio[]='Sila Pilih';
-        foreach ($product as $row) {
-          $optio[$row->productCode]=
-          $row->productName."(".$row->productCode.")";
-        }
+   
+   
 
-      
-    $datav['optionproduct']=$optio;
+      $datav['order']= $this->m_c->get_order_customer($dataserch,$page);
 
-    $datav['order']= $this->m_c->get_order_customer($customerName,$productName);
+    
+      $config['base_url'] = site_url('customer/customer/get_order_customer');
+      $config['total_rows'] = 30;
+      $config['per_page'] = 10; 
+
+//config for bootstrap pagination class integration
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+
+
+$this->pagination->initialize($config);
+
+
+ $datav['link']= $this->pagination->create_links();
+
+
+
 
     $this->load->view('customer/v_order_customer', $datav);
     
 
 
   }
-
-
-    /******************************************
-     author:
-     date:
-     ********************************************/
-  public function _add_employees(){
-
-
-        $data['title']='hello wolrd';
-
-        $this->form_validation->set_rules('firstName',"First Name",'required');
-
-
-
-        if($this->form_validation->run()==false){
-
-
-             $this->load->view('employees/v_form_add',$data);
-
-        }else{
-
-         
-
-        }
-   
-
-
-        }
-
-
-
-
 
 
 

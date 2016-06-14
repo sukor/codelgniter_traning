@@ -10,6 +10,23 @@
  */
 
   class Home extends CI_Controller{
+
+    public function _remap($method, $params = array()){
+      if($method!="index")
+        $method = '_'.$method;
+
+      if(method_exists($this, $method))
+      {
+        return call_user_func_array([$this, $method], $params);
+      }
+
+        show_404();
+    }
+
+    public function _output($output){
+      $respon["content_view"] = $output;
+      echo $this->load->view('template_admin',$respon,TRUE);
+    }
      
      /******************************************
      author:
@@ -25,8 +42,8 @@
         $datav['senarai_customer']=array('ali','abu','samad','dollah');
 
 
-         $data['content_view']=$this->load->view('v_customer_detail',$datav,TRUE);
-      	 $this->load->view('template_admin',$data);
+        $this->load->view('v_customer_detail',$datav);
+      	 
 
 
       }
@@ -35,7 +52,7 @@
      date:
      ********************************************/
 
-      public function test($val,$val2){
+      public function _test($val,$val2){
 
       	echo $val;
       	echo '<br>';
@@ -43,7 +60,7 @@
       }
 
 
-        public function test3($tot){
+        public function _test3($tot=3){
 
       	echo $tot;
 
