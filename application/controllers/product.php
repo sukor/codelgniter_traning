@@ -4,4 +4,8 @@ class Product extends MY_Controller{
 	public function index(){
 		$this->load->view("product/index");
 	}
+
+	public function _products(){
+		$this->load->view("product/list_products");
+	}
 }
