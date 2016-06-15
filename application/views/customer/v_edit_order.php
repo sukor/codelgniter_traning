@@ -6,7 +6,7 @@ echo form_open('customer/customer/add_employees',$atb);
 <fieldset>
 
 <!-- Form Name -->
-<legend>ADD EMPLOYEE</legend>
+<legend>Edit Order</legend>
 <?= validation_errors()?>
 
 <!-- Text input-->
@@ -17,10 +17,10 @@ echo form_open('customer/customer/add_employees',$atb);
    <?php
 
    $inputfirstName=array(
-     'name'=>'firstName',
-     'id'=>'firstName',
+     'name'=>'orderDate',
+     'id'=>'orderDate',
      'class'=>'form-control input-md',
-     'value'=>set_value('firstName'),
+     'value'=>set_value('orderDate'),
      'required'=>'required',
      'data-error'=>'Sila Masukan'
    	);

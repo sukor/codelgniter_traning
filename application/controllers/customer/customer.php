@@ -188,15 +188,15 @@
 
         $data['title']='hello wolrd';
 
-        $this->form_validation->set_rules('firstName',"First Name",'required|alpha');
-        $this->form_validation->set_rules('lastName',"Last Name",'required|alpha');
+        $this->form_validation->set_rules('firstName',"First Name",'required|alpha|callback_nameCheck');
+        $this->form_validation->set_rules('lastName',"Last Name",'required|alpha|callback_nameCheck');
         $this->form_validation->set_rules('email',"Email",'required|valid_email|is_unique[employees.email]|matches[emailp]');
         $this->form_validation->set_rules('emailp',"Email",'required|valid_email|is_unique[employees.email]');
         $this->form_validation->set_message('required','%s Wajib Di isi');
         $this->form_validation->set_message('alpha','%s Huruf sahaja');
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">','</div>');
+        
 
-   //$this->form_validation->set_error_delimiters('<h1>','</h1>');
 
 
         if($this->form_validation->run()==false){
@@ -204,7 +204,37 @@
 
              $this->load->view('employees/v_form_add',$data);
 
+       
         }else{
+
+          $firstName=$this->input->post('firstName',TRUE);
+          $lastName=$this->input->post('lastName',TRUE);
+          $email=$this->input->post('email',TRUE);
+
+
+          $dataepmloyes=array(
+                  'firstName'=>$firstName,
+                  'lastName'=>$lastName,
+                  'email'=>$email,
+
+            );
+
+     $secc=$this->m_c->add_employees($dataepmloyes);
+
+     if($secc){
+
+
+            redirect('customer/customer/success_add_employee/'.$secc);
+
+
+     }else{
+
+
+
+     }
+
+
+      
 
          
 
@@ -215,7 +245,63 @@
         }
 
 
+     /******************************************
+     author:
+     date:
+     ********************************************/
 
+
+        public function nameCheck($val){
+
+          if($val=='test'){
+
+            $this->form_validation->set_message('nameCheck','%s tidak boleh nama test');
+
+           return FALSE;
+          }else{
+
+             return TRUE;
+          }
+
+             
+
+        }
+
+
+  /******************************************
+     author:
+     date:
+     ********************************************/
+
+
+        public function _success_add_employee($id){
+
+          
+       $datav['detail'] = $this->m_c->get_employeebyid($id);
+
+       $this->load->view('employees/v_detail_employees',$datav);
+
+             
+
+        }
+
+
+        /******************************************
+     author:
+     date:
+     ********************************************/
+
+
+        public function _edit_order($id){
+
+          
+       $datav['detail'] = $this->m_c->get_order_customerbyId($id);
+
+       $this->load->view('customer/v_edit_order',$datav);
+
+             
+
+        }
 
 
 

@@ -79,17 +79,28 @@ echo form_open('customer/customer/get_order_customer',$atb);
 // echo "</pre>";
 
 $this->table->set_heading(array('Customer','Product Name',
-	'Product Code ','Quantity Ordered  ','Date'));
+	'Product Code ','Quantity Ordered  ','Date','Action'));
 
 // add template
 $tmpl=array('table_open'=>'<table class="table" id="ordertable">');
 $this->table->set_template($tmpl);
 //end add template
 
+
 foreach ($order as $row) {
+
+//button action
+$linkedit=anchor('customer/customer/edit_order/'.$row->orderNumber,'Edit',array('class'=>'btn btn-info'));
+$linkpadam=anchor('customer/customer/delete_order/'.$row->orderNumber,'Delete',array('class'=>'btn btn-info'));
+$btnaction='
+<div class="btn-group btn-group-justified" role="group" >'.
+$linkedit.$linkpadam.'</div>';
+// button action
+
+
 	$this->table->add_row(array($row->customerName,
 		$row->productName,$row->productCode,
-		$row->quantityOrdered,$row->orderDate));
+		$row->quantityOrdered,$row->orderDate,$btnaction));
 	
 }
 

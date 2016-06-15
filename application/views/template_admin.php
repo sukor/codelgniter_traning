@@ -416,6 +416,12 @@
     <script src="<?=base_url('assets/sbadmin2/bower_components/datatables/media/js/jquery.dataTables.min.js')?>"></script>
      <!-- datatable -->
     <script src="<?=base_url('assets/sbadmin2/bower_components/datatables/media/js/dataTables.bootstrap.min.js')?>"></script>
+
+     <!-- bootstrap-validator  -->
+    <script src="<?=base_url('assets/js/validator.js')?>"></script>
+
+    
+
 </body>
 
 </html>

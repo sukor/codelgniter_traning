@@ -112,10 +112,90 @@ class M_customer extends CI_Model{
   return $query->result(); 
 
     }
+}
 
+         /******************************************
+     author:
+     date:
+     ********************************************/
+      
+
+ function add_employees($data){
+  
+   $this->db->insert('employees',$data);
+
+    return $this->db->insert_id();
 
 
  }
+
+       /******************************************
+     author:
+     date:
+     ********************************************/
+      
+
+ function get_employeebyid($id){
+      
+  $this->db->select('*');
+  $this->db->from('employees');
+  $this->db->where('employeeNumber',$id);
+  
+  $query=$this->db->get();
+     if($query->num_rows() > 0){
+
+  return $query->row(); 
+
+    }
+  
+
+}
+
+
+    /******************************************
+     author:
+     date:
+     ********************************************/
+      
+ function get_order_customerbyId($id){
+
+  $this->db->select('*');
+  $this->db->from('orders o');
+  $this->db->join('customers c',
+    'o.customerNumber = c.customerNumber','right');
+  $this->db->join('orderdetails od',
+    'od.orderNumber=o.orderNumber','right');
+  $this->db->join('products p',
+    'p.productCode =od.productCode ','right');
+
+
+
+    $this->db->where('o.orderNumber',$id);
+
+
+
+
+    $query=$this->db->get();
+
+
+    if($query->num_rows() > 0){
+
+    
+
+        return $query->result();
+
+    }
+
+ 
+    
+
+    
+
+
+ }
+
+
+
 
 
 
