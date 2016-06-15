@@ -188,8 +188,15 @@
 
         $data['title']='hello wolrd';
 
-        $this->form_validation->set_rules('firstName',"First Name",'required');
+        $this->form_validation->set_rules('firstName',"First Name",'required|alpha');
+        $this->form_validation->set_rules('lastName',"Last Name",'required|alpha');
+        $this->form_validation->set_rules('email',"Email",'required|valid_email|is_unique[employees.email]|matches[emailp]');
+        $this->form_validation->set_rules('emailp',"Email",'required|valid_email|is_unique[employees.email]');
+        $this->form_validation->set_message('required','%s Wajib Di isi');
+        $this->form_validation->set_message('alpha','%s Huruf sahaja');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">','</div>');
 
+   //$this->form_validation->set_error_delimiters('<h1>','</h1>');
 
 
         if($this->form_validation->run()==false){
