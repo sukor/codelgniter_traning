@@ -22,8 +22,11 @@ class Ajaxdatatable extends CI_Controller {
                 );
 
         //format array is optional, but shown here for the sake of example
-        $json = $this -> datatable -> datatableJson();
 
+
+        $json = $this -> datatable -> datatableJson();
+        $this -> datatable -> setColumnSearchType('p.productVendor', 'both');
+        
         $this -> output -> set_header("Pragma: no-cache");
         $this -> output -> set_header("Cache-Control: no-store, no-cache");
         $this -> output -> set_content_type('application/json') -> set_output(json_encode($json));

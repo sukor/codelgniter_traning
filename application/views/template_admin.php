@@ -28,6 +28,9 @@
 
       <!-- datatable -->
     <link href="<?=base_url('assets/sbadmin2/bower_components/datatables/media/css/dataTables.bootstrap.min.css')?>" rel="stylesheet" type="text/css">
+  
+       <!-- buttons datatable -->
+    <link href="<?=base_url('assets/css/buttons.dataTables.min.css')?>" rel="stylesheet" type="text/css">
 
 
        <!-- jQuery -->
@@ -40,9 +43,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-   Finally include the desired theme
+ 
 
-<link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
+
 
 </head>
 
@@ -419,6 +422,13 @@
 
      <!-- bootstrap-validator  -->
     <script src="<?=base_url('assets/js/validator.js')?>"></script>
+    
+         <!-- datatable button  -->
+    <script src="<?=base_url('assets/js/dataTables.buttons.min.js')?>"></script>
+
+
+      <!-- datatable button  -->
+    <script src="<?=base_url('assets/js/buttons.flash.min.js')?>"></script>
 
     
 

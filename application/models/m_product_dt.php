@@ -11,8 +11,10 @@
         }
 
         public function joinArray(){
-            return array(
-            	"orderdetails od"=>"od.productCode=p.productCode");
+            // return array(
+            // 	"orderdetails od"=>"od.productCode=p.productCode");
+            return NULL;
+
         }
 
         public function whereClauseArray(){

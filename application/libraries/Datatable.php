@@ -150,7 +150,7 @@ class Datatable
     public function getColumnSearchType($col)
     {
         //	log_message('info', 'getColumnSearchType() ' . var_export($this -> matchType, TRUE));
-        return isset($this->matchType[$col]) ? $this->matchType[$col] : 'after';
+        return isset($this->matchType[$col]) ? $this->matchType[$col] : 'both';
     }
 
     /**
@@ -392,7 +392,8 @@ class Datatable
                 //handle custom sql expressions/subselects
 
                 $debug .= 'col[' . $c['data'] . '] value[' . $c['search']['value'] . '] ' . PHP_EOL;
-                //	log_message('info', 'colname[' . $colName . '] searchtype[' . $searchType . ']');
+                	log_message('info', 'colname[' . $colName . '] searchtype[' . $searchType . ']');
+                    
                 $this->CI->db->like($colName, $c['search']['value'], $searchType, $this->protectIdentifiers);
             }
         }
@@ -405,7 +406,7 @@ class Datatable
             $sqlOr = '';
             $op = '';
             foreach ($searchableColumns as $c) {
-                $sqlOr .= $op . $c . ' LIKE \'' . $this->CI->db->escape_like_str($gSearchVal) . '%\'';
+                $sqlOr .= $op . $c . ' LIKE \'%' . $this->CI->db->escape_like_str($gSearchVal) . '%\'';
                 $op = ' OR ';
             }
 
